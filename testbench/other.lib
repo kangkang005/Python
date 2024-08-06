@@ -1,0 +1,18 @@
+.lib ff
+.param noise = 1
+
+* .if (presim == 1)
+.if (pg == 1)
+.param noiseflag = 1
+.endif
+.endl ff
+
+.lib tt
+.param noise = 0
+
+.param noiseflag = 0
+.endl tt
+
+.param flag = 1
+.meas tran tsaen_risex       trig v(ck)      val=v50 rise =  1 td=c05
++                           targ v(xlio_r.xsa.saen)   val=v80 rise=1 td=c05

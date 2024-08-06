@@ -1,0 +1,8 @@
+Brand,Year,Kms Driven,Mileage,Sum,City,Detail,Choice
+Tata,2016,32000,200,32001.00,,"Tata,2016",yes
+Hyundai,2014,30000,2,30001.00,,"Hyundai,2014",No
+Tata,2011,60000,12,60001.00,,"Tata,2011",No
+Maruti,2012,10000,45,10001.00,,"Maruti,2012",No
+Hyundai,2016,46000,14,46001.00,,"Hyundai,2016",yes
+Tata,2018,15000,89,15001.00,,"Tata,2018",yes
+Tata,2016,32000,200,nan,Delhi,"Tata,2016",yes

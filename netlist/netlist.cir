@@ -1,0 +1,30 @@
+.title inverter
+.option post accurate probe
+.lib 'D:\hspice2007\model\PTM45nm\nmos90.lib' TT
+.lib 'D:\hspice2007\model\PTM45nm\pmos90.lib' TT
+V1 1 0 dc=1.8
+
+.SUBCKT feimen 1 0 in out
+Mp0 out in 1 1 pmos W=20u L=180n 
+Mn0 out in 0 0 nmos W=10u L=180n 
+.ENDS 
+
+.SUBCKT yufei 1 0 A B vo
+Mp1 vo A 1 1 pmos W=20u L=180n
+Mp2 vo B 1 1 pmos W=20u L=180n
+Mn1 vo A vn vn nmos W=10u L=180n
+Mn2 vn B 0 0 nmos W=10u L=180n
+.ENDS
+
+X1 1 0 D 3 feimen
+X2 1 0 D CLK 2 yufei
+X3 1 0 CLK 3 4 yufei
+X4 1 0 2 QF Q yufei
+X5 1 0 Q 4 QF yufei
+
+V2 CLK 0 pulse(0 1.8 0.1n 0.1n 0.1n 0.2u 0.4u) 
+V3 D 0 pulse(0 1.8 0.1n 0.1n 0.1n 1u 2u)
+.op
+.tran 0.1n 5u 
+.probe v(CLK) v(D) v(Q) v(QF)
+.end

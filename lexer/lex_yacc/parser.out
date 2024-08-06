@@ -1,0 +1,33 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    COMMENT
+    LPAREN
+    NUMBER
+    RPAREN
+
+Grammar
+
+Rule 0     S' -> expression
+Rule 1     expression -> expression PLUS expression
+Rule 2     expression -> expression MINUS expression
+Rule 3     expression -> expression TIMES expression
+Rule 4     expression -> expression DIVIDE expression
+
+Terminals, with rules where they appear
+
+COMMENT              : 
+DIVIDE               : 4
+LPAREN               : 
+MINUS                : 2
+NUMBER               : 
+PLUS                 : 1
+RPAREN               : 
+TIMES                : 3
+error                : 
+
+Nonterminals, with rules where they appear
+
+expression           : 1 1 2 2 3 3 4 4 0
+

@@ -1,0 +1,28 @@
+(看lib pin下的timing_type)
+R2                                          R1
+Tcq     --> DO cell                         -->DO(related_pin=CK) max(cell_rise, cell_fall)
+Trc     --> CKB minimum_period              -->CK(timing_type=minimum_period) max(rise_constraint,fall_constraint)
+Twc     --> CKA minimum_period              -->CK(timing_type=minimum_period) max(rise_constraint, fall_constraint)
+Toh     --> min(DO retain)                  -->DO(related_pin=CK) min(retaining_rise, retaining_fall)
+Tas     --> AA/AB setup rise                -->A(timing_type=setup_rising) rise_constraint
+Tah     --> AA/AB hold                      -->A(timing_type=hold_rising) fall_constraint
+Tces    --> CEBB/CEBA setup rise            -->CEB(timing_type=setup_rising) rise_constraint
+Tceh    --> CEBB/CEBA hold                  -->CEB(timing_type=hold_rising) fall_constraint
+Tws     --> WEB setup rise                  -->WEB(timing_type=setup_rising) rise_constraint
+Twh     --> WEB hold                        -->WEB(timing_type=hold_rising) fall_constraint
+Tds     --> DI setup rise                   -->DI(timing_type=setup_rising) rise_constraint
+Tdh     --> DI hold                         -->DI(timing_type=hold_rising) fall_constraint
+Thpw    --> CKA/B min_pulse_width rise      -->CK(timing_type=min_pulse_width setup_rising) rise_constraint
+Tlpw    --> CKA/B min_pulse_width fall      -->CK(timing_type=min_pulse_width hold_rising) fall_constraint
+Tflss   --> LS setup rise                   -->DS(timing_type=setup_rising) rise_constraint
+Tflsh   --> LS hold                         -->DS(timing_type=hold_rising) fall_constraint
+Tdsq    --> DO cell                         -->DO(related_pin=DS) cell_fall
+Tdsoh   --> DO retain                       -->DO(related_pin=DS) retaining_fall
+Tfdss   --> DS setup rise                   -->DS(timing_type=setup_rising) rise_constraint
+Tfdsh   --> DS hold                         -->DS(timing_type=hold_rising) fall_constraint
+Tsdq    --> DO cell                         -->DO(related_pin=SD) cell_fall
+Tsdoh   --> DO retain                       -->DO(related_pin=SD) retaining_fall
+Tfsds   --> SD setup rise                   -->SD(timing_type=setup_rising) rise_constraint
+Tfsdh   --> SD hold                         -->SD(timing_type=hold_rising) fall_constraint
+Tgws                                        -->GWEB(timing_type=setup_rising) rise_constraint
+Tgwh                                        -->GWEB(timing_type=hold_rising) fall_constraint

@@ -1,0 +1,110 @@
+* title
+.TITLE ADDER
+.lib "model.cir" ptm16lstp
+.options acct list post
+.option finesim_mode = spicexd
+.option post=0
+.global vdd gnd vss vdda
+.TEMP 85
+
+.param D=1 H=2
+.param H=1
+.param vds_sup=0.1
+.param supply=0.85
+
+.param finp=1
+.param finn=1
+.param length=20n
+.param fint=12n
+.param finh=26n
+
+.param L1=1
+.param L2=2
+.param L3=3
+.param L4=4
+.param L5=5
+.param L6=6
+.param L7=7
+.param L8=8
+*
+*
+.SUBCKT INV A Y nfinn=finn nfinp=finp
+xnmos Y A GND GND lnfet l=length nfin=nfinn
+xpmos Y A VDD VDD lpfet l=length nfin=nfinp
+.ENDS
+*
+.SUBCKT XOR2 A B P nfinn=finn nfinp=finp
+* generate signal P
+r1 A B 100
+xpmos1 N1 B VDD VDD lpfet l=length nfin=nfinp
+xpmos2 X1 A N1 VDD lpfet l=length nfin=nfinp
+xpmos3 N2 B VDD VDD lpfet l=length nfin=nfinp
+xpmos4 N2 A VDD VDD lpfet l=length nfin=nfinp
+xpmos5 P X1 N2 VDD lpfet l=length nfin=nfinp
+
+xnmos1 X1 B GND GND lnfet l=length nfin=nfinn
+xnmos2 X1 A GND GND lnfet l=length nfin=nfinn
+xnmos3 P A N3 GND lnfet l=length nfin=nfinn
+xnmos4 N3 B GND GND lnfet l=length nfin=nfinn
+xnmos5 P X1 GND GND lnfet l=length nfin=nfinn
+.ENDS
+
+* .SUBCKT AND2 A B G nfinn=finn nfinp=finp
+* * generate signal G
+* xpmos6 X2 A VDD VDD lpfet l=length nfin=nfinp
+* xpmos7 X2 B VDD VDD lpfet l=length nfin=nfinp
+* xpmos8 G X2 VDD VDD lpfet l=length nfin=nfinp
+
+* xnmos6 X2 B N4 GND lnfet l=length nfin=nfinn
+* xnmos7 N4 A GND GND lnfet l=length nfin=nfinn
+* xnmos8 G X2 GND GND lnfet l=length nfin=nfinn
+* .ENDS
+*
+.SUBCKT OR2 A B Y nfinn=finn nfinp=finp
+xpmos9 N5 A VDD VDD lpfet l=length nfin=nfinp
+xpmos10 X3 B N5 VDD lpfet l=length nfin=nfinp
+xpmos11 Y X3 VDD VDD lpfet l=length nfin=nfinp
+
+xnmos9 X3 A GND GND lnfet l=length nfin=nfinn
+xnmos10 X3 B GND GND lnfet l=length nfin=nfinn
+xnmos11 Y X3 GND GND lnfet l=length nfin=nfinn
+
+XINV VSS VDD INV
+.ENDS
+
+.SUBCKT DOT G1 P1 G2 P2 GOUT POUT D=H
+XAND1 P1 G2 P1G2 AND2 M='H'
+XOR1 G1 P1G2 GOUT OR2 M='H'
+XAND2 P1 P2 POUT
++AND2 M='H'
+.ENDS
+
+XINV VSS VDD INV
+XDOT1 G1 P1 G2 P2 GOUT POUT / DOT
+mnmos D G S B nfet w=(0.048*(nfin)-0.038)*1e-06
+
+.SUBCKT INV2 A Y nfinn=finn nfinp=finp
+xnmos1 Y A GND GND lnfet l=length nfin=nfinn
+xpmos1 Y A VDD VDD lpfet l=length nfin=nfinp
+xnmos2 Y A GND GND lnfet l=length nfin=nfinn
+xpmos2 Y A VDD VDD lpfet l=length nfin=nfinp
+.param cor=1
++kevin_temper=2
+.model pnp pnp level=1
++temperature=2
+********************
+*** temperature ****
+********************
++level=2
+********************
+*** temperature ****
+********************
++l=length nfin=nfinp
+
+* .SUBCKT test G1 P1 G2 P2 GOUT POUT D=H
+* XAND1 P1 G2 P1G2 AND2 M='H'
+* XOR1 G1 P1G2 GOUT OR2 M='H'
+* XAND2 P1 P2 POUT
+* +AND2 M='H'
+* .ENDS
+.ENDS

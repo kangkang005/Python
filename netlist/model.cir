@@ -1,0 +1,12 @@
+.SUBCKT AND2 A B G nfinn=finn nfinp=finp
+* generate signal G
+xpmos6 X2 A VDD VDD lpfet l=length nfin=nfinp
+xpmos7 X2 B VDD VDD lpfet l=length nfin=nfinp
+xpmos8 G X2 VDD VDD lpfet l=length nfin=nfinp
+
+xnmos6 X2 B N4 GND lnfet l=length nfin=nfinn
+xnmos7 N4 A GND GND lnfet l=length nfin=nfinn
+xnmos8 G X2 GND GND lnfet l=length nfin=nfinn
+.ENDS
+
+XINV1 A B Y OR2

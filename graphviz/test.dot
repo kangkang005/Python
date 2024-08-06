@@ -1,0 +1,26 @@
+digraph {
+	bgcolor="#EEEEEE";
+
+	node [shape="box"];
+	a[shape="ellipse", color="red"];
+	b[fontcolor="#55AA55", style="dotted"];
+	c[style="invis"];
+	d[style="filled" color="#F9B34B"];
+	stract_z[shape="record", label="<f1> 第一列|{<f21> 第二列-行| <f22> 第二列二行}|<f3> 第三列"];
+
+	a->stract_z:f21;
+	b->stract_z:f22[style="dotted", color="#55AA55"];
+	a->c[headclip=false, arrowhead="none"];
+	c->d[tailclip=false];
+	d->sa:sa01;
+
+	subgraph cluster_a {
+		label="定义的一个子图";
+		style="rounded"
+		sa[shape="record", label="{{<sa01> 001 | <sa02> 002}|<sa1> sa1| <sa2> sa2}"];
+		sa:sa1->sb;
+		sa:sa2->sc;
+	}
+
+	{rank="same"; stract_z; d}
+}

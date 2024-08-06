@@ -1,0 +1,17 @@
+.lib FFGS
+.param presim = 1
+.if (presim == 1)
+.lib "D:\Project\Python\testbench\other.lib" ff
+.param test = 1
+.endif
+.lib "other1.lib" ff
+
+.param postsim = 1
+.endl FFGS
+
+.lib TT
+.lib "other1.lib" tt
+
+.param test_flag = 0
+.endl TT
+*were
